@@ -941,10 +941,10 @@ else
 	end
 end
 
-select * from systemUser
-declare @t varchar(20)
-declare @suc int
-exec userLogin 'fan1','fan1',@t OUTPUT,@suc OUTPUT
-select @t
-select(@suc)
-drop proc userLogin
+--select * from systemUser
+--declare @t varchar(20)
+--declare @suc int
+--exec userLogin 'fan1','fan1',@t OUTPUT,@suc OUTPUT
+--select @t
+--select(@suc)
+--drop proc userLogin
