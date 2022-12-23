@@ -94,7 +94,9 @@ namespace MatchWebApp
                 }
                 else
                 {
-                    Response.Redirect("StadiumManager.aspx");
+                    
+                    Response.Redirect("registerstadmanager.aspx?username=" + username + " ");
+
 
                 }
             }

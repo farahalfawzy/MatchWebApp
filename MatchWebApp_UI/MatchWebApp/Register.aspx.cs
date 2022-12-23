@@ -36,10 +36,11 @@ namespace MatchWebApp
             {
                 if (DropDownList1.SelectedValue == "Stadium Manager")
                 {
+                    //pass no msg in the label
                     String msg = null ;
                     Response.Redirect("registerstadmanager.aspx?err=" + msg + " ");
                 }
-
+                //lesa el ba2y
             }
 
 

@@ -56,7 +56,8 @@ namespace MatchWebApp
                 }
                 if (type.Value.ToString().Equals("StadiumManager"))
                 {
-                    Response.Redirect("StadiumManager.aspx");
+                    //send username to the stadium manager webpage and render it
+                    Response.Redirect("StadiumManager.aspx?username=" + username + " ");
                 }
                 if (type.Value.ToString().Equals("SportsAssocManager"))
                 {
@@ -68,8 +69,8 @@ namespace MatchWebApp
                 }
             }
 
-            Debug.Write(type.Value.ToString());
-            Debug.Write(success.Value.ToString());
+            //Debug.Write(type.Value.ToString());
+            //Debug.Write(success.Value.ToString());
 
         }
 

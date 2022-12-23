@@ -11,7 +11,7 @@ namespace MatchWebApp
 {
 
 
-    public partial class StadiumManager
+    public partial class StadiumInfo
     {
 
         /// <summary>
@@ -33,39 +33,48 @@ namespace MatchWebApp
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Stadinfo control.
+        /// ID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Stadinfo;
+        protected global::System.Web.UI.WebControls.Label ID;
 
         /// <summary>
-        /// allreq control.
+        /// name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button allreq;
+        protected global::System.Web.UI.WebControls.Label name;
 
         /// <summary>
-        /// allreq0 control.
+        /// cap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button allreq0;
+        protected global::System.Web.UI.WebControls.Label cap;
 
         /// <summary>
-        /// allreq1 control.
+        /// location control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button allreq1;
+        protected global::System.Web.UI.WebControls.Label location;
+
+        /// <summary>
+        /// status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label status;
     }
 }
