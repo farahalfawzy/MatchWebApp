@@ -37,7 +37,7 @@ namespace MatchWebApp
             conn.Close();
             if (success.Value.ToString().Equals( "0"))
             {
-                Debug.Write("here");
+                //Debug.Write("here");
                 String errormsg = type.Value.ToString();
                 Label1.Text=errormsg;
             }

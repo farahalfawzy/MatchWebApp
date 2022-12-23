@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Configuration;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Configuration;
@@ -33,9 +34,10 @@ namespace MatchWebApp
             }
             else
             {
-                if (DropDownList1.SelectedValue == "Sports Association Manager")
+                if (DropDownList1.SelectedValue == "Stadium Manager")
                 {
-                ///
+                    String msg = null ;
+                    Response.Redirect("registerstadmanager.aspx?err=" + msg + " ");
                 }
 
             }

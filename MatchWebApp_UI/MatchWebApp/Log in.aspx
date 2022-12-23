@@ -15,7 +15,7 @@
             <asp:TextBox ID="Username" runat="server"></asp:TextBox>
             <br />
             Password:<br />
-            <asp:TextBox ID="Password" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Password" runat="server" TextMode="Password" />
             <br />
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
             <br />

@@ -903,7 +903,9 @@ inner join stadium s on (s.Id=sm.stadium_id)
 where s.name =@stadName and c1.Name=@clubName AND H.Status='unhandled'
 )
 GO
---return int
+----------------------------------------------------------------------------------------------------
+------------------------------------added proc and functions-----------------------------------------
+-----------------------------------------------------------------------------------------------------
 Create Procedure userLogin
 @username varchar(20),
 @password Varchar(20),
@@ -948,3 +950,35 @@ end
 --select @t
 --select(@suc)
 --drop proc userLogin
+GO
+Create proc registerstadiummanager
+@mname VARCHAR(20),
+@sname VARCHAR(20),
+@username VARCHAR(20),
+@password VARCHAR(20),
+@suc int output,
+@type varchar(50) OUTPUT
+AS 
+BEGIN
+if @username in (select userName from SystemUser)
+	begin
+		set @suc=0;
+		set @type='username is taken';
+	end
+else
+	begin
+		if exists(select * from stadium s, StadiumManager sm where s.id=sm.stadium_id and s.Name = @sname)
+			begin
+				print ('here')
+				set @suc=0;
+				set @type='stadium already has a manager';
+			end
+		else 
+			begin
+				exec addStadiumManager @mname ,@sname ,@username,@password
+				set @suc=1;
+				set @type=' Your registration was successful!';
+			end
+	end
+END
+
