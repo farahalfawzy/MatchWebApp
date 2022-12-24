@@ -78,6 +78,7 @@
     <Content Include="SportsAssociationManager.aspx" />
     <Content Include="StadiumInfo.aspx" />
     <Content Include="StadiumManager.aspx" />
+    <Content Include="StadiumManagerRequests.aspx" />
     <Content Include="SystemAdmin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="StadiumManager.aspx.designer.cs">
       <DependentUpon>StadiumManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StadiumManagerRequests.aspx.cs">
+      <DependentUpon>StadiumManagerRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StadiumManagerRequests.aspx.designer.cs">
+      <DependentUpon>StadiumManagerRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemAdmin.aspx.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>

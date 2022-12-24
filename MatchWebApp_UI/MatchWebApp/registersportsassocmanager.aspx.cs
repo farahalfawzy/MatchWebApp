@@ -16,7 +16,8 @@ namespace MatchWebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string str = Request.QueryString["err"].ToString();
+            Label1.Text = str;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace MatchWebApp
             {
                 String errormsg = "please fill in all of the fields";
                 Label1.Text = errormsg;
-                Response.Redirect("registersportsassocmanager.aspx?err='" + errormsg + "' ");
+                Response.Redirect("registersportsassocmanager.aspx?err=" + errormsg + " ");
 
 
 
@@ -62,7 +63,7 @@ namespace MatchWebApp
                     //Debug.Write("here");
                     String errormsg = type.Value.ToString();
                     Label1.Text = errormsg;
-                    Response.Redirect("registersportsassocmanager.aspx?err='" + errormsg + "' ");
+                    Response.Redirect("registersportsassocmanager.aspx?err=" + errormsg + " ");
 
 
                 }

@@ -74,7 +74,7 @@ namespace MatchWebApp
             {
                 String errormsg = "please fill in all of the fields";
                 Label1.Text = errormsg;
-                Response.Redirect("registerclubrep.aspx?err='" + errormsg + "' ");
+                Response.Redirect("registerclubrep.aspx?err=" + errormsg + " ");
 
 
 

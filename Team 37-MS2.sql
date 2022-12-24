@@ -1072,3 +1072,59 @@ else
 			
 	end
 END
+
+go
+Create Proc registerfan
+@Fname VARCHAR(20),
+@username VARCHAR(20),
+@password VARCHAR(20),
+@n_id VARCHAR(20),
+@birth_date DATETIME,
+@address VARCHAR(20),
+@phone_no INT,
+@suc int output,
+@type varchar(50) OUTPUT
+AS 
+BEGIN
+if @username in (select userName from SystemUser)
+	begin
+		set @suc=0;
+		set @type='username is taken';
+	end
+else
+	begin
+
+				exec addFan @Fname,@username,@password,@n_id,@birth_date,@address,@phone_no
+				set @suc=1;
+				set @type=' Your registration was successful!';
+			
+	end
+END
+
+go
+create view managerrequests
+	AS
+	SELECT *
+	FROM allPendingRequests()
+
+
+go
+create function allPendingRequestsMS3
+(@SMusername varchar (20))
+
+returns table 
+as
+return(
+select Cr.name AS 'Club Represantative',HC.Name AS 'Host Club', GC.name AS 'Guest Club name' , M.start_time AS 'Match Start Time',M.end_time AS 'Match End Time',h.Status AS 'Status'
+from clubRepresentative Cr , hostRequest H , match M,StadiumManager SM,club GC,CLUB HC
+where Cr.id=H.Representative_ID AND 
+	  H.match_ID=M.match_ID AND 
+	  GC.club_ID=M.Guest_club_id AND 
+	  SM.username= @SMusername AND  
+	  H.Manager_ID=SM.ID AND 
+	  HC.club_ID=M.Host_club_Id 
+);
+
+select * from allPendingRequestsMS3 ('stadmanager3')
+select * from StadiumManager 
+select * from SystemUser

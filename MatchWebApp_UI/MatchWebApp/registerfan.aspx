@@ -24,19 +24,18 @@
             <br />
             <br />
             National ID:&nbsp;
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="NID" runat="server"></asp:TextBox>
             <br />
             <br />
-            Phone number: <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            Phone number: <asp:TextBox ID="phoneno" runat="server"></asp:TextBox>
             <br />
             <br />
             Birthdate:
-            <asp:TextBox ID="birthdate" runat="server" placeholder="From" type="date" value="yyyy-mm-dd"></asp:TextBox>
-
+            <asp:TextBox ID="birthdate" runat="server" placeholder="From" type="date" value="11-11-1900"></asp:TextBox>
             <br />
             <br />
             Address:
-            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <asp:TextBox ID="add" runat="server"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
@@ -46,11 +45,5 @@
             <br />
         </div>
     </form>
-    <form id="form1" runat="server">
-        <p>
-            &nbsp;</p>
-        <div>
-        </div>
-    </form>
-</body>
+    </body>
 </html>

@@ -76,7 +76,7 @@ namespace MatchWebApp
             {
                 String errormsg = "please fill in all of the fields";
                 Label1.Text = errormsg;
-                Response.Redirect("registerstadmanager.aspx?err='" + errormsg + "' ");
+                Response.Redirect("registerstadmanager.aspx?err=" + errormsg + " ");
 
 
 
@@ -94,7 +94,6 @@ namespace MatchWebApp
                 }
                 else
                 {
-                    
                     Response.Redirect("StadiumManager.aspx?username=" + username + " ");
 
 

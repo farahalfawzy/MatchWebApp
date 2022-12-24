@@ -13,6 +13,7 @@ namespace MatchWebApp
 {
     public partial class StadiumInfo : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string username = Request.QueryString["username"].ToString();
@@ -37,8 +38,6 @@ namespace MatchWebApp
                 }
             }
             conn.Close();
-
-            Label1.Text = username;
 
 
             SqlCommand AllStadInfo = new SqlCommand("select sm.username , s.* from Stadium s , StadiumManager sm where s.id=sm.stadium_id ", conn);
