@@ -37,15 +37,41 @@ namespace MatchWebApp
                 if (DropDownList1.SelectedValue == "Stadium Manager")
                 {
                     //pass no msg in the label
-                    String msg = null ;
+                    String msg = null;
                     Response.Redirect("registerstadmanager.aspx?err=" + msg + " ");
                 }
-                //lesa el ba2y
+                else 
+                {
+                    if (DropDownList1.SelectedValue == "Sports Association Manager")
+                    {
+                        //pass no msg in the label
+                        String msg = null;
+                        Response.Redirect("registersportsassocmanader.aspx?err=" + msg + " ");
+                    }
+                    else 
+                    {
+                        if (DropDownList1.SelectedValue == "Club Representative")
+                        {
+                            String msg = null;
+                            Response.Redirect("registerclubrep.aspx?err=" + msg + " ");
+                        }
+                        else
+                        {
+                            if (DropDownList1.SelectedValue == "Fane")
+                            {
+                                String msg = null;
+                                Response.Redirect("registerfan.aspx?err=" + msg + " ");
+                            }
+                        }
+
+                            
+                    }
+                }
             }
 
 
 
-            }    
-        }
+        }    
+    }
     
 }

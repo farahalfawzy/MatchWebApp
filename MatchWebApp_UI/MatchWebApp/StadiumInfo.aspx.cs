@@ -48,7 +48,8 @@ namespace MatchWebApp
             while (rdr2.Read())
             {
                 String usernametemp = rdr2.GetString(rdr2.GetOrdinal("username"));
-                if (usernametemp.Equals(username)) {
+                if (usernametemp.Equals(username))
+                {
                     int Sid = rdr2.GetInt32(rdr2.GetOrdinal("Id"));
                     String Sname = rdr2.GetString(rdr2.GetOrdinal("Name"));
                     String Sloc = rdr2.GetString(rdr2.GetOrdinal("Location"));

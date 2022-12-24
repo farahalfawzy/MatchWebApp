@@ -48,11 +48,11 @@ namespace MatchWebApp
                 Password.Text = "";
                 if (type.Value.ToString().Equals("SystemAdmin"))
                 {
-                    Response.Redirect("SystemAdmin.aspx");
+                    Response.Redirect("SystemAdmin.aspx?username=" + username + " ");
                 }
                 if (type.Value.ToString().Equals("ClubRepresentative"))
                 {
-                    Response.Redirect("ClubRepresentative.aspx");
+                    Response.Redirect("ClubRepresentative.aspx?username=" + username + " ");
                 }
                 if (type.Value.ToString().Equals("StadiumManager"))
                 {
@@ -61,11 +61,11 @@ namespace MatchWebApp
                 }
                 if (type.Value.ToString().Equals("SportsAssocManager"))
                 {
-                    Response.Redirect("SportsAssociationManager.aspx");
+                    Response.Redirect("SportsAssociationManager.aspx?username=" + username + " ");
                 }
                 if (type.Value.ToString().Equals("fan"))
                 {
-                    Response.Redirect("Fan.aspx");
+                    Response.Redirect("Fan.aspx?username=" + username + " ");
                 }
             }
 
