@@ -3,63 +3,37 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Reflection.Emit;
-using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace MatchWebApp
 {
-    public partial class registerstadmanager : System.Web.UI.Page
+    public partial class registersportsassocmanager : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //fill label with empty string if first time rendering or error message
-            string str = Request.QueryString["err"].ToString();
-            Label1.Text = str;
 
-            
-            //fill drop down list
-            string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
-            //create a new connection
-            SqlConnection conn = new SqlConnection(connStr);
-
-            SqlCommand allStadiums = new SqlCommand("SELECT name from allStadiums", conn);
-
-            conn.Open();
-            SqlDataReader rdr = allStadiums.ExecuteReader(CommandBehavior.CloseConnection);
-            while (rdr.Read())
-            {
-                String name = rdr.GetString(rdr.GetOrdinal("name"));
-                DropDownList1.Items.Add(name);
-                
-            }
         }
-
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-  
-        }
-
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
 
-            String Managername = name.Text;
+            String Manname = name.Text;
             String username = Username.Text;
             String password = Password.Text;
-            String stadium = DropDownList1.SelectedItem.Value;
 
 
-            SqlCommand registerstadmanager = new SqlCommand("registerstadiummanager", conn);
+            SqlCommand registerstadmanager = new SqlCommand("registersportsassocmanager", conn);
             registerstadmanager.CommandType = CommandType.StoredProcedure;
 
-            registerstadmanager.Parameters.Add(new SqlParameter("@mname", Managername));
-            registerstadmanager.Parameters.Add(new SqlParameter("@sname", stadium));
+            registerstadmanager.Parameters.Add(new SqlParameter("@name", Manname));
             registerstadmanager.Parameters.Add(new SqlParameter("@username", username));
             registerstadmanager.Parameters.Add(new SqlParameter("@password", password));
 
@@ -72,11 +46,11 @@ namespace MatchWebApp
             registerstadmanager.ExecuteNonQuery();
             conn.Close();
 
-            if (username.Equals("") || Managername.Equals("") || password.Equals(""))
+            if (username.Equals("") || Manname.Equals("") || password.Equals(""))
             {
                 String errormsg = "please fill in all of the fields";
                 Label1.Text = errormsg;
-                Response.Redirect("registerstadmanager.aspx?err='" + errormsg + "' ");
+                Response.Redirect("registersportsassocmanager.aspx?err='" + errormsg + "' ");
 
 
 
@@ -88,14 +62,14 @@ namespace MatchWebApp
                     //Debug.Write("here");
                     String errormsg = type.Value.ToString();
                     Label1.Text = errormsg;
-                    Response.Redirect("registerstadmanager.aspx?err=" + errormsg + " ");
+                    Response.Redirect("registersportsassocmanager.aspx?err='" + errormsg + "' ");
 
 
                 }
                 else
                 {
-                    
-                    Response.Redirect("StadiumManager.aspx?username=" + username + " ");
+
+                    Response.Redirect("SportsAssociationManager.aspx?username=" + username + " ");
 
 
                 }
@@ -104,3 +78,12 @@ namespace MatchWebApp
         }
     }
 }
+
+
+
+
+
+
+
+
+    

@@ -46,7 +46,7 @@ namespace MatchWebApp
                     {
                         //pass no msg in the label
                         String msg = null;
-                        Response.Redirect("registersportsassocmanader.aspx?err=" + msg + " ");
+                        Response.Redirect("registersportsassocmanager.aspx?err=" + msg + " ");
                     }
                     else 
                     {
@@ -57,7 +57,7 @@ namespace MatchWebApp
                         }
                         else
                         {
-                            if (DropDownList1.SelectedValue == "Fane")
+                            if (DropDownList1.SelectedValue == "Fan")
                             {
                                 String msg = null;
                                 Response.Redirect("registerfan.aspx?err=" + msg + " ");

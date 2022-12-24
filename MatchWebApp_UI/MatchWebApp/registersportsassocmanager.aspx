@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="registerclubrep.aspx.cs" Inherits="MatchWebApp.registerclubrep" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="registersportsassocmanager.aspx.cs" Inherits="MatchWebApp.registersportsassocmanager" %>
 
 <!DOCTYPE html>
 
@@ -22,10 +22,6 @@
             Password:&nbsp;&nbsp;
             <asp:TextBox ID="Password" runat="server" TextMode="Password" />
             <br />
-            <br />
-            Club Name:&nbsp;&nbsp;
-            <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-            </asp:DropDownList>
             <br />
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
             <br />

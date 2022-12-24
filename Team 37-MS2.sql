@@ -981,3 +981,94 @@ else
 			end
 	end
 END
+--------------------------------------------------------------------------------------------------------
+go
+Create proc registerclubrep
+@Rname VARCHAR(20),
+@cname VARCHAR(20),
+@username VARCHAR(20),
+@password VARCHAR(20),
+@suc int output,
+@type varchar(50) OUTPUT
+AS 
+BEGIN
+if @username in (select userName from SystemUser)
+	begin
+		set @suc=0;
+		set @type='username is taken';
+	end
+else
+	begin
+		if exists(select * from club c, ClubRepresentative CR where c.club_ID=cr.Club_ID and c.Name = @cname)
+			begin
+				print ('here')
+				set @suc=0;
+				set @type='Club already has a representative';
+			end
+		else 
+			begin
+				exec addRepresentative @Rname ,@cname ,@username,@password
+				set @suc=1;
+				set @type=' Your registration was successful!';
+			end
+	end
+END
+go
+-------------------------------------------------------------------------------------------------------
+Create proc registerclubrep
+@Rname VARCHAR(20),
+@cname VARCHAR(20),
+@username VARCHAR(20),
+@password VARCHAR(20),
+@suc int output,
+@type varchar(50) OUTPUT
+AS 
+BEGIN
+if @username in (select userName from SystemUser)
+	begin
+		set @suc=0;
+		set @type='username is taken';
+	end
+else
+	begin
+		if exists(select * from club c, ClubRepresentative CR where c.club_ID=cr.Club_ID and c.Name = @cname)
+			begin
+				print ('here')
+				set @suc=0;
+				set @type='Club already has a representative';
+			end
+		else 
+			begin
+				exec addRepresentative @Rname ,@cname ,@username,@password
+				set @suc=1;
+				set @type=' Your registration was successful!';
+			end
+	end
+END
+
+------------------------------------------------------------------------------
+go
+
+
+Create proc registersportsassocmanager
+@name VARCHAR(20),
+@username VARCHAR(20),
+@password VARCHAR(20),
+@suc int output,
+@type varchar(50) OUTPUT
+AS 
+BEGIN
+if @username in (select userName from SystemUser)
+	begin
+		set @suc=0;
+		set @type='username is taken';
+	end
+else
+	begin
+
+				exec addAssociationManager @name  ,@username,@password
+				set @suc=1;
+				set @type=' Your registration was successful!';
+			
+	end
+END

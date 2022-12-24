@@ -7,7 +7,48 @@
     <title></title>
 </head>
 <body>
+     <form id="form2" runat="server">
+        <div>
+            Please fill the following form to register<br />
+            <br />
+            Name:&nbsp;&nbsp;
+            <asp:TextBox ID="name" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Username:&nbsp;&nbsp;
+            <asp:TextBox ID="Username" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:&nbsp;&nbsp;
+            <asp:TextBox ID="Password" runat="server" TextMode="Password" />
+            <br />
+            <br />
+            National ID:&nbsp;
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Phone number: <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Birthdate:
+            <asp:TextBox ID="birthdate" runat="server" placeholder="From" type="date" value="yyyy-mm-dd"></asp:TextBox>
+
+            <br />
+            <br />
+            Address:
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button1" runat="server" Text="Submit" OnClick="Button1_Click" />
+            <br />
+        </div>
+    </form>
     <form id="form1" runat="server">
+        <p>
+            &nbsp;</p>
         <div>
         </div>
     </form>

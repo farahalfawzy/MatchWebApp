@@ -16,7 +16,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="Stadinfo" runat="server" Text="Stadium Information" OnClick="Stadinfo_Click" />
+            <asp:Button ID="Stadinfo" runat="server" Text="Show Stadium Info" OnClick="Stadinfo_Click" />
             <br />
             <br />
             <asp:Button ID="allreq" runat="server" Text="      All requests      " />

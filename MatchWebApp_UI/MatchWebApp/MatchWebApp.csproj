@@ -73,7 +73,7 @@
     <Content Include="Register.aspx" />
     <Content Include="registerclubrep.aspx" />
     <Content Include="registerfan.aspx" />
-    <Content Include="registersportsassocmanader.aspx" />
+    <Content Include="registersportsassocmanager.aspx" />
     <Content Include="registerstadmanager.aspx" />
     <Content Include="SportsAssociationManager.aspx" />
     <Content Include="StadiumInfo.aspx" />
@@ -125,12 +125,12 @@
     <Compile Include="registerfan.aspx.designer.cs">
       <DependentUpon>registerfan.aspx</DependentUpon>
     </Compile>
-    <Compile Include="registersportsassocmanader.aspx.cs">
-      <DependentUpon>registersportsassocmanader.aspx</DependentUpon>
+    <Compile Include="registersportsassocmanager.aspx.cs">
+      <DependentUpon>registersportsassocmanager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="registersportsassocmanader.aspx.designer.cs">
-      <DependentUpon>registersportsassocmanader.aspx</DependentUpon>
+    <Compile Include="registersportsassocmanager.aspx.designer.cs">
+      <DependentUpon>registersportsassocmanager.aspx</DependentUpon>
     </Compile>
     <Compile Include="registerstadmanager.aspx.cs">
       <DependentUpon>registerstadmanager.aspx</DependentUpon>
