@@ -359,7 +359,9 @@ go
 
 CREATE PROC deleteMatch 
 @hostClub VARCHAR(20),
-@guestClub VARCHAR(20)
+@guestClub VARCHAR(20),
+@startTime dateTime,
+@endTime dateTime
 AS
 DECLARE @hostClubID INT
 SELECT @hostClubID=C.club_ID
@@ -371,10 +373,15 @@ SELECT @guestClubID=C.club_ID
 FROM Club C
 where C.Name LIKE @guestClub
 
-DELETE FROM Match
-WHERE Host_club_Id = @hostClubID AND Guest_club_id = @guestClubID
-go
 
+DELETE FROM Match
+WHERE Host_club_Id = @hostClubID AND Guest_club_id = @guestClubID and start_time=@startTime and end_time=@endTime
+go
+drop proc deleteMatch
+select * from match
+
+
+go
 CREATE PROC deleteMatchesOnStadium
 @stadiumName VARCHAR(20)
 AS
@@ -607,7 +614,6 @@ where Cr.id=H.Representative_ID AND
 	  --HC.ID=M.Host_club_Id AND CR.Club_ID=HC.ID 
 );
 go
-
 CREATE PROC acceptRequest
 @SMusername VARCHAR (20),
 @hostClub VARCHAR(20),
@@ -635,18 +641,18 @@ FROM Match M, Club HC,CLUB GC
 WHERE M.Host_club_Id=HC.club_ID AND M.Guest_club_id=GC.club_ID AND M.start_time = @startTime 
 AND HC.Name=@hostClub AND GC.Name=@competeClub
 
+UPDATE MATCH
+set Stadium_id=@stadID
+where match_ID=@Match_Id
+
 DECLARE @capacity int
  set @capacity= ( select s.capacity
 from match m inner join stadium s on(s.ID=m.stadium_Id)
 where m.match_ID=@Match_Id)
 
 UPDATE  HostRequest
-set status='accepted'
+set Status='accepted'
 where Match_Id=@Match_Id  AND Representative_ID=@ClubREp_id AND manager_id =@StadManager_Id
-
-UPDATE MATCH
-set Stadium_id=@stadID
-where match_ID=@Match_Id
 
 DECLARE @i int=@capacity
 WHILE @i >0
@@ -656,7 +662,6 @@ VALUES(@Match_Id,1)
 set @i = @i-1
 end
 go
-
 CREATE PROC rejectRequest
 @SMusername VARCHAR (20),
 @hostClub VARCHAR(20),
@@ -1125,6 +1130,5 @@ where Cr.id=H.Representative_ID AND
 	  HC.club_ID=M.Host_club_Id 
 );
 
-select * from allPendingRequestsMS3 ('stadmanager3')
-select * from StadiumManager 
-select * from SystemUser
+
+go

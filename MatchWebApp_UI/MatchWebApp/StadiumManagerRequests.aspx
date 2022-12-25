@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
         <div style="height: 28px">
             Welcome,<asp:Label ID="Label1" runat="server" Text=""></asp:Label>
             <br />

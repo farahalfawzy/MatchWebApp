@@ -22,10 +22,9 @@
             <asp:Button ID="allreq" runat="server" Text="      All requests      " OnClick="allreq_Click" />
             <br />
             <br />
-            <asp:Button ID="allreq0" runat="server" Text="  Accept a request  " />
+            <asp:Button ID="handle" runat="server" Text="  handle a request  " OnClick="allreq0_Click" />
             <br />
             <br />
-            <asp:Button ID="allreq1" runat="server" Text="  Reject a request  " Width="175px" />
         </div>
     </form>
 </body>

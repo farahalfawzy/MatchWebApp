@@ -11,7 +11,7 @@ namespace MatchWebApp
 {
 
 
-    public partial class StadiumManager
+    public partial class HandleRequests
     {
 
         /// <summary>
@@ -33,30 +33,30 @@ namespace MatchWebApp
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Stadinfo control.
+        /// DropDownList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Stadinfo;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
 
         /// <summary>
-        /// allreq control.
+        /// accept control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button allreq;
+        protected global::System.Web.UI.WebControls.Button accept;
 
         /// <summary>
-        /// handle control.
+        /// reject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button handle;
+        protected global::System.Web.UI.WebControls.Button reject;
     }
 }

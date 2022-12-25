@@ -40,7 +40,7 @@ namespace MatchWebApp
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-  
+            Debug.Write(DropDownList1.SelectedItem.Value + "\n\n");
         }
 
 

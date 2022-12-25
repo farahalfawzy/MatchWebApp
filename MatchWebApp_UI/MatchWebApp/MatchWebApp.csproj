@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="ClubRepresentative.aspx" />
     <Content Include="Fan.aspx" />
+    <Content Include="HandleRequests.aspx" />
     <Content Include="Log in.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="registerclubrep.aspx" />
@@ -96,6 +97,13 @@
     </Compile>
     <Compile Include="Fan.aspx.designer.cs">
       <DependentUpon>Fan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HandleRequests.aspx.cs">
+      <DependentUpon>HandleRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HandleRequests.aspx.designer.cs">
+      <DependentUpon>HandleRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Log in.aspx.cs">
       <DependentUpon>Log in.aspx</DependentUpon>

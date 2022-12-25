@@ -54,5 +54,11 @@ namespace MatchWebApp
             Response.Redirect("StadiumManagerRequests.aspx?username=" + username + " ");
 
         }
+
+        protected void allreq0_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HandleRequests.aspx?username=" + username + "");
+
+        }
     }
 }
