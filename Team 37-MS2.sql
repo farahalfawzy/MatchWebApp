@@ -21,9 +21,9 @@ Insert Into SportsAssociationManager Values
 Insert Into SystemAdmin Values
 ('sys Admin 1','sysadmn1');
 INSERT INTO Stadium(name,status,location,capacity) VALUES 
-('Stadium1',1,'Qatar',720),
-('Stadium2',0,'Brazil',1000),
-('Stadium3',1,'Portugal',1500);
+('Stadium1',1,'Qatar',7),
+('Stadium2',0,'Brazil',10),
+('Stadium3',1,'Portugal',15);
 INSERT INTO CLUB VALUES 
 ('club1','Germany'),
 ('club2','Spain'),
@@ -247,6 +247,13 @@ DROP FUNCTION IF EXISTS clubsNeverPlayed;
 DROP FUNCTION IF EXISTS matchWithHighestAttendance;
 DROP FUNCTION IF EXISTS matchRankedByAttendance;
 DROP FUNCTION IF EXISTS requestsFromClub;
+drop procedure if exists userLogin;
+drop procedure if exists registerstadiummanager;
+drop procedure if exists  registerclubrep;
+drop procedure if exists  registersportsassocmanager;
+drop procedure if exists registerfan;
+DROP FUNCTION IF EXISTS allPendingRequestsMS3;
+DROP FUNCTION IF EXISTS availableMatchesToAttend2;
 go
 CREATE PROCEDURE clearAllTables
 AS
@@ -376,10 +383,6 @@ where C.Name LIKE @guestClub
 
 DELETE FROM Match
 WHERE Host_club_Id = @hostClubID AND Guest_club_id = @guestClubID and start_time=@startTime and end_time=@endTime
-go
-drop proc deleteMatch
-select * from match
-
 
 go
 CREATE PROC deleteMatchesOnStadium
@@ -688,7 +691,6 @@ UPDATE  HostRequest
 set status='rejected'
 where Match_Id=@Match_Id  AND Representative_ID=@ClubREp_id AND manager_id =@StadManager_Id
 go
-
 CREATE PROC addFan
 @Fname VARCHAR(20),
 @username VARCHAR(20),
@@ -702,8 +704,8 @@ if @username not in (select username from SystemUser) AND @n_id not in (select N
 begin
 INSERT INTO SystemUser(userName,Password)
 VALUES (@username,@password)
-INSERT INTO Fan(name,National_Id,Birth_date,Address,phone_no,status)
-VALUES(@Fname,@n_id,@birth_date,@address,@phone_no,1)
+INSERT INTO Fan(name,National_Id,Birth_date,Address,phone_no,status,username)
+VALUES(@Fname,@n_id,@birth_date,@address,@phone_no,1,@username)
 END
 go
 
@@ -745,6 +747,7 @@ WHERE M.start_time>=@Date AND
 			  WHERE T.STATUS=1 AND T.MATCH_ID=M.match_ID)
 )
 Go
+
 
 Create Procedure purchaseTicket
 @nId int,
@@ -928,7 +931,7 @@ else
 	begin
 	IF @password NOT IN (SELECT password FROM SystemUser Where username=@username AND Password=@password)
 		begin
-			set @type='Wrong pass';
+			set @type='Wrong password';
 			set @success=0
 		end
 	else
@@ -948,13 +951,7 @@ else
 	end
 end
 
---select * from systemUser
---declare @t varchar(20)
---declare @suc int
---exec userLogin 'fan1','fan1',@t OUTPUT,@suc OUTPUT
---select @t
---select(@suc)
---drop proc userLogin
+
 GO
 Create proc registerstadiummanager
 @mname VARCHAR(20),
@@ -1020,39 +1017,7 @@ else
 END
 go
 -------------------------------------------------------------------------------------------------------
-Create proc registerclubrep
-@Rname VARCHAR(20),
-@cname VARCHAR(20),
-@username VARCHAR(20),
-@password VARCHAR(20),
-@suc int output,
-@type varchar(50) OUTPUT
-AS 
-BEGIN
-if @username in (select userName from SystemUser)
-	begin
-		set @suc=0;
-		set @type='username is taken';
-	end
-else
-	begin
-		if exists(select * from club c, ClubRepresentative CR where c.club_ID=cr.Club_ID and c.Name = @cname)
-			begin
-				print ('here')
-				set @suc=0;
-				set @type='Club already has a representative';
-			end
-		else 
-			begin
-				exec addRepresentative @Rname ,@cname ,@username,@password
-				set @suc=1;
-				set @type=' Your registration was successful!';
-			end
-	end
-END
 
-------------------------------------------------------------------------------
-go
 
 
 Create proc registersportsassocmanager
@@ -1106,12 +1071,6 @@ else
 	end
 END
 
-go
-create view managerrequests
-	AS
-	SELECT *
-	FROM allPendingRequests()
-
 
 go
 create function allPendingRequestsMS3
@@ -1130,5 +1089,47 @@ where Cr.id=H.Representative_ID AND
 	  HC.club_ID=M.Host_club_Id 
 );
 
+go
+Create function availableMatchesToAttend2
+(@Date datetime)
+
+returns table
+AS
+return(
+
+SELECT HC.Name AS 'Host Club' ,GC.Name AS 'Guest Club' ,S.Name AS 'Stadium' ,S.location AS 'Location'
+FROM Match M , Club HC, Club GC ,Stadium S
+WHERE M.start_time=@Date AND --wala >=
+	  M.Host_club_Id=HC.club_ID AND
+	  M.Guest_club_id=GC.club_ID AND
+	  M.Stadium_id = S.Id AND
+	  EXISTS (SELECT * 
+			  FROM Ticket T
+			  WHERE T.STATUS=1 AND T.MATCH_ID=M.match_ID)
+)
 
 go
+
+
+SELECT * FROM MATCH
+SELECT * FROM Stadium
+SELECT * FROM StadiumManager
+SELECT * FROM Club
+SELECT * FROM ClubRepresentative
+SELECT * FROM HostRequest
+SELECT * FROM SystemUser
+SELECT * FROM Fan
+SELECT * FROM Ticket
+SELECT* FROM TicketBuyingTransactions
+
+INSERT INTO Match VALUES
+
+('2022-11-19 14:00:00','2022-11-19 16:00:00',3,2,NULL);
+
+INSERT INTO HostRequest VALUES
+
+(3,1,6,'unhandled')
+
+
+
+

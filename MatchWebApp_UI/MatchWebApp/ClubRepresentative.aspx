@@ -8,8 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            Club Representative</div>
+
+        <asp:TextBox ID="TextBox1" runat="server" placeholder="From" type="date" value="11-11-1900"></asp:TextBox>
+            <asp:Button ID="Stadiums" runat="server" Text="View Available Stadiums" OnClick="Stadiums_Click" />
     </form>
 </body>
 </html>

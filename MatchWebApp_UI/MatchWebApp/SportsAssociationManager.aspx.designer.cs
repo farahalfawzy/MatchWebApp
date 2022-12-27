@@ -60,13 +60,22 @@ namespace MatchWebApp
         protected global::System.Web.UI.WebControls.TextBox endTime;
 
         /// <summary>
-        /// b1 control.
+        /// DateOfMatch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button b1;
+        protected global::System.Web.UI.WebControls.TextBox DateOfMatch;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
         /// label1 control.
@@ -96,15 +105,6 @@ namespace MatchWebApp
         protected global::System.Web.UI.WebControls.TextBox guestClub1;
 
         /// <summary>
-        /// endTime1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox endTime1;
-
-        /// <summary>
         /// startTime1 control.
         /// </summary>
         /// <remarks>
@@ -114,13 +114,31 @@ namespace MatchWebApp
         protected global::System.Web.UI.WebControls.TextBox startTime1;
 
         /// <summary>
-        /// Button1 control.
+        /// endTime1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.TextBox endTime1;
+
+        /// <summary>
+        /// DateOfMatch1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DateOfMatch1;
+
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
         /// label2 control.

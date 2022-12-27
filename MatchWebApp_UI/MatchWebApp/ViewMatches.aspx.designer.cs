@@ -11,7 +11,7 @@ namespace MatchWebApp
 {
 
 
-    public partial class ClubRepresentative
+    public partial class ViewMatches
     {
 
         /// <summary>
@@ -24,21 +24,21 @@ namespace MatchWebApp
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// TextBox1 control.
+        /// DropDownList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
 
         /// <summary>
-        /// Stadiums control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Stadiums;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

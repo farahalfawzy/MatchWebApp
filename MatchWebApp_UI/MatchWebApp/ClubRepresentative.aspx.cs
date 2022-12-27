@@ -13,5 +13,11 @@ namespace MatchWebApp
         {
 
         }
+
+        protected void Stadiums_Click(object sender, EventArgs e)
+        {
+            string Date = TextBox1.Text;
+            Response.Redirect("allAvailableStadiums.aspx?Date=" + Date + " ");
+        }
     }
 }

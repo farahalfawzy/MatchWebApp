@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="sportsAssociationManager.aspx.cs" Inherits="MatchWebApp.sportsAssociationManager" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SportsAssociationManager.aspx.cs" Inherits="MatchWebApp.sportsAssociationManager" %>
 
 <!DOCTYPE html>
 
@@ -8,8 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-      
-        to add a match please enter the hostclub name, guest club name,start and end time of the match then click add match <br />
+            to add a match please enter the hostclub name, guest club name,start and end time of the match then click add match <br />
             <br />
             host club:<br />
             <asp:TextBox ID="hostClub" runat="server"></asp:TextBox>
@@ -18,13 +17,19 @@
             <asp:TextBox ID="guestClub" runat="server"></asp:TextBox>
             <br />
             start time:<br />
-             <asp:TextBox type="date" ID="startTime" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="startTime" runat="server" placeholder="From" type="time"></asp:TextBox>
 
         <br />
             end time:<br />
-            <asp:TextBox type="date" ID="endTime" runat="server" ></asp:TextBox>
-         
-        <asp:Button id="b1" Text="add match" runat="server" OnClick="b1_Click" />
+                    <asp:TextBox ID="endTime" runat="server" placeholder="From" type="time"></asp:TextBox>
+         <br />
+            Date of match:<br />
+                    <asp:TextBox ID="DateOfMatch" runat="server" placeholder="From" type="date"></asp:TextBox>
+
+      
+
+            <asp:Button ID="Button1" runat="server" Text="add match" OnClick="Button1_Click" />
+
         <asp:label ID="label1" runat="server"></asp:label>
         <br />
         <br />
@@ -42,20 +47,17 @@
             <asp:TextBox ID="guestClub1" runat="server"></asp:TextBox>
             <br />
             start time:<br />
-             <asp:TextBox type="date" ID="endTime1" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="startTime1" runat="server" placeholder="From" type="time"></asp:TextBox>
 
         <br />
             end time:<br />
-            <asp:TextBox type="date" ID="startTime1" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="endTime1" runat="server" placeholder="From" type="time"></asp:TextBox>
+        <br />
+            Date of match:<br />
+                    <asp:TextBox ID="DateOfMatch1" runat="server" placeholder="From" type="date"></asp:TextBox>
          
-             <asp:Button ID="Button1" runat="server" Text="delete match" OnClick="Button1_Click" />
-
-
-
-
-                
+            <asp:Button ID="Button2" runat="server" Text="delete match" />  
                   <asp:label ID="label2" runat="server"></asp:label>
-
         <div>
         </div>
     </form>
