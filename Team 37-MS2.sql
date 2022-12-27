@@ -254,6 +254,11 @@ drop procedure if exists  registersportsassocmanager;
 drop procedure if exists registerfan;
 DROP FUNCTION IF EXISTS allPendingRequestsMS3;
 DROP FUNCTION IF EXISTS availableMatchesToAttend2;
+drop procedure if exists MatchExists;
+drop view MatchesNeverPlayed;
+DROP FUNCTION IF EXISTS AlreadyPlayedMatches;
+DROP FUNCTION IF EXISTS upcomingMatches;
+
 go
 CREATE PROCEDURE clearAllTables
 AS
@@ -1108,25 +1113,77 @@ WHERE M.start_time=@Date AND --wala >=
 go
 
 
-SELECT * FROM MATCH
-SELECT * FROM Stadium
-SELECT * FROM StadiumManager
-SELECT * FROM Club
-SELECT * FROM ClubRepresentative
-SELECT * FROM HostRequest
-SELECT * FROM SystemUser
-SELECT * FROM Fan
-SELECT * FROM Ticket
-SELECT* FROM TicketBuyingTransactions
+create function upcomingMatches
+()
 
-INSERT INTO Match VALUES
+returns table 
+as
+return(
+select   C.Name AS 'club Name' , C2.Name AS 'Competing Club', M.start_time AS 'Start Time',M.end_time AS 'end Time'
+FROM CLUB C INNER JOIN MATCH M ON  M.Host_club_Id=C.club_ID 
+INNER JOIN CLUB C2 ON  M.Guest_club_id=C2.club_ID
+WHERE M.start_time>CURRENT_TIMESTAMP 
 
-('2022-11-19 14:00:00','2022-11-19 16:00:00',1,2,NULL);
+);
 
-INSERT INTO HostRequest VALUES
+go
 
-(1,1,7,'unhandled')
 
-exec purchaseTicket 34567,'club1','club2','2022-11-19 14:00'
 
+
+create function AlreadyPlayedMatches
+()
+
+returns table 
+as
+return(
+select   C.Name AS 'club Name' , C2.Name AS 'Competing Club', M.start_time AS 'Start Time',M.end_time AS 'end Time'
+FROM CLUB C INNER JOIN MATCH M ON  M.Host_club_Id=C.club_ID 
+INNER JOIN CLUB C2 ON  M.Guest_club_id=C2.club_ID
+WHERE M.end_time<CURRENT_TIMESTAMP 
+
+);
+
+go
+
+Create View MatchesNeverPlayed
+As
+
+select c1.Name AS 'first club name', C2.Name AS 'second club name'
+from club c1 ,club c2 
+where  c2.club_ID > c1.club_ID AND --OR C2.ID <> C1.ID (ALLOWS DUPS)
+	  NOT EXISTS ( SELECT *
+				   FROM MATCH M 
+				   WHERE 
+				   ((M.Guest_club_id=C2.club_ID AND M.Host_club_Id=C1.club_ID) OR
+				   (M.Guest_club_id=C1.club_ID AND M.Host_club_Id=C2.club_ID)))
+
+ go
+
+create procedure MatchExists
+
+@hostClub VARCHAR(20),
+@guestClub VARCHAR(20),
+@startTime DATETIME,
+@endTime DateTime,
+@check int output
+as
+begin
+
+DECLARE @host_id INT
+SET @host_id=(SELECT club.club_ID
+FROM Club
+WHERE Club.Name=@hostClub)
+
+
+DECLARE @club_id INT
+SET @club_id=(SELECT Club.club_ID
+FROM Club
+WHERE Club.Name=@guestClub)
+
+set @check=
+(select count(*)
+from match m 
+where m.Host_club_Id=@host_id  and m.Guest_club_id=@club_id and m.end_time=@endTime and m.start_time=@startTime)
+end
 

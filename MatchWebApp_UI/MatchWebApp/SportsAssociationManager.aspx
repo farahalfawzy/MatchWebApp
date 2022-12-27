@@ -28,7 +28,7 @@
 
       
 
-            <asp:Button ID="Button1" runat="server" Text="add match" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="add match" OnClick="Button1_Click" />  
 
         <asp:label ID="label1" runat="server"></asp:label>
         <br />
@@ -56,10 +56,61 @@
             Date of match:<br />
                     <asp:TextBox ID="DateOfMatch1" runat="server" placeholder="From" type="date"></asp:TextBox>
          
-            <asp:Button ID="Button2" runat="server" Text="delete match" />  
+            <asp:Button ID="Button2" runat="server" Text="delete match" OnClick="Button2_Click" />  
                   <asp:label ID="label2" runat="server"></asp:label>
-        <div>
-        </div>
+
+       <br />
+        <br />
+        <br />
+        
+            
+            All upcoming matches
+    <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
+        <tr align="left" style="background-color:#004080;color:White;" >
+            <td class="auto-style1"> Host Club Name </td>                        
+            <td class="auto-style2"> guest Club name </td>            
+            <td>Match Start Time</td>   
+            <td>Match End Time</td> 
+
+        </tr>
+                <%=getWhileLoopData()%>
+
+    </table>
+
+        <br />
+        <br />
+        <br />
+             
+            Already played matches
+    <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
+        <tr align="left" style="background-color:#004080;color:White;" >
+            <td class="auto-style1"> Host Club Name </td>                        
+            <td class="auto-style2"> guest Club name </td>            
+            <td>Match Start Time</td>   
+            <td>Match End Time</td> 
+
+        </tr>
+                <%=getWhileLoopData1()%>
+
+    </table>
+            <br />
+        <br />
+        <br />
+             
+            clubs never scheduled to play
+    <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
+        <tr align="left" style="background-color:#004080;color:White;" >
+            <td class="auto-style1"> Host Club Name </td>                        
+            <td class="auto-style2"> guest Club name </td>            
+            
+
+        </tr>
+                <%=getWhileLoopData2()%>
+
+    </table>
+        
+        
+     
     </form>
 </body>
 </html>

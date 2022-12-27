@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="allAvailableStadiums.aspx" />
+    <Content Include="clubInfo.aspx" />
     <Content Include="ClubRepresentative.aspx" />
     <Content Include="Fan.aspx" />
     <Content Include="HandleRequests.aspx" />
@@ -82,6 +83,7 @@
     <Content Include="StadiumManager.aspx" />
     <Content Include="StadiumManagerRequests.aspx" />
     <Content Include="SystemAdmin.aspx" />
+    <Content Include="UpComingMatches.aspx" />
     <Content Include="ViewMatches.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -92,6 +94,13 @@
     </Compile>
     <Compile Include="allAvailableStadiums.aspx.designer.cs">
       <DependentUpon>allAvailableStadiums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clubInfo.aspx.cs">
+      <DependentUpon>clubInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clubInfo.aspx.designer.cs">
+      <DependentUpon>clubInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClubRepresentative.aspx.cs">
       <DependentUpon>ClubRepresentative.aspx</DependentUpon>
@@ -191,6 +200,13 @@
     </Compile>
     <Compile Include="SystemAdmin.aspx.designer.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpComingMatches.aspx.cs">
+      <DependentUpon>UpComingMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpComingMatches.aspx.designer.cs">
+      <DependentUpon>UpComingMatches.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewMatches.aspx.cs">
       <DependentUpon>ViewMatches.aspx</DependentUpon>
