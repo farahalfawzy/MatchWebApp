@@ -747,8 +747,6 @@ WHERE M.start_time>=@Date AND
 			  WHERE T.STATUS=1 AND T.MATCH_ID=M.match_ID)
 )
 Go
-
-
 Create Procedure purchaseTicket
 @nId int,
 @hostClub varChar(20),
@@ -769,11 +767,10 @@ DECLARE @Match_Id INT
 SELECT @Match_Id =M.match_ID
 FROM Match M
 WHERE M.Host_club_Id=@host_id and M.Guest_club_id=@club_id and M.start_time=@Date
-
 declare @TicketId int
 set @TicketId=  (select Min( T.ID)
 from  MATCH M , TICKET T
-where T.MATCH_ID=M.match_ID AND T.STATUS=1)
+where T.MATCH_ID=M.match_ID AND T.STATUS=1 AND M.match_ID=@Match_Id)
 
 update Ticket 
 set 
@@ -1124,12 +1121,12 @@ SELECT* FROM TicketBuyingTransactions
 
 INSERT INTO Match VALUES
 
-('2022-11-19 14:00:00','2022-11-19 16:00:00',3,2,NULL);
+('2022-11-19 14:00:00','2022-11-19 16:00:00',1,2,NULL);
 
 INSERT INTO HostRequest VALUES
 
-(3,1,6,'unhandled')
+(1,1,7,'unhandled')
 
-
+exec purchaseTicket 34567,'club1','club2','2022-11-19 14:00'
 
 
