@@ -57,8 +57,8 @@ namespace MatchWebApp
                 string ClubRepresantative = rdr.GetString(0);
                 string HostClubname = rdr.GetString(1);
                 string GuestClubname = rdr.GetString(2);
-                DateTime MatchStartTime=rdr.GetDateTime(3);
-                DateTime MatchEndTime =rdr.GetDateTime(4);
+                string MatchStartTime=rdr.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss.fff");
+                string MatchEndTime =rdr.GetDateTime(4).ToString("yyyy-MM-dd HH:mm:ss.fff");
                 string Status=rdr.GetString(5);
                 htmlStr += "<tr><td>" + ClubRepresantative + "</td><td>" + HostClubname + "</td><td>" + GuestClubname + "</td><td>" + MatchStartTime + "</td><td>" + MatchEndTime+ "</td><td>"+Status+ "</td></tr>";
         }

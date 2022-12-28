@@ -24,8 +24,8 @@ namespace MatchWebApp
         {
             string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
-            String host = hostClub.Text;
-            String guest = guestClub.Text;
+            String host = hostClub.Text.ToLower();
+            String guest = guestClub.Text.ToLower();
             String start = startTime.Text;
             String end = endTime.Text;
             String date = DateOfMatch.Text;
@@ -83,6 +83,8 @@ namespace MatchWebApp
                     String errormsg = "club may not registered";
                     guestClub.Text = errormsg;
                     hostClub.Text = errormsg;
+                    label1.Text = "";
+
 
                 }
 
@@ -94,6 +96,7 @@ namespace MatchWebApp
                 String errormsg = "hostclub and guestclub can't be the same";
                 guestClub.Text = errormsg;
                 hostClub.Text = errormsg;
+                label1.Text = "";
 
             }
 
@@ -108,8 +111,8 @@ namespace MatchWebApp
         {
             string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
-            String host = hostClub1.Text;
-            String guest = guestClub1.Text;
+            String host = hostClub1.Text.ToLower();
+            String guest = guestClub1.Text.ToLower();
             String start = startTime1.Text;
             String end = endTime1.Text;
             String date = DateOfMatch1.Text;
@@ -184,6 +187,8 @@ namespace MatchWebApp
                         String errormsg = "club may not registered";
                         guestClub1.Text = errormsg;
                         hostClub1.Text = errormsg;
+                        label2.Text = "";
+
 
                     }
 
@@ -195,6 +200,8 @@ namespace MatchWebApp
                     String errormsg = "hostclub and guestclub can't be the same";
                     guestClub1.Text = errormsg;
                     hostClub1.Text = errormsg;
+                    label2.Text = "";
+
 
                 }
 
@@ -221,8 +228,8 @@ namespace MatchWebApp
 
                 string HostClubname = rdr.GetString(0);
                 string GuestClubname = rdr.GetString(1);
-                DateTime MatchStartTime = rdr.GetDateTime(2);
-                DateTime MatchEndTime = rdr.GetDateTime(3);
+                String MatchStartTime = rdr.GetDateTime(2).ToString("yyyy-MM-dd HH:mm:ss.fff");
+                String MatchEndTime = rdr.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss.fff");
                 htmlStr += "</tr><td>" + HostClubname + "</td><td>" + GuestClubname + "</td><td>" + MatchStartTime + "</td><td>" + MatchEndTime + "</td><tr>";
             }
 
@@ -249,8 +256,8 @@ namespace MatchWebApp
 
                 string HostClubname = rdr.GetString(0);
                 string GuestClubname = rdr.GetString(1);
-                DateTime MatchStartTime = rdr.GetDateTime(2);
-                DateTime MatchEndTime = rdr.GetDateTime(3);
+                String MatchStartTime = rdr.GetDateTime(2).ToString("yyyy-MM-dd HH:mm:ss.fff");
+                String MatchEndTime = rdr.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss.fff");
                 htmlStr += "</tr><td>" + HostClubname + "</td><td>" + GuestClubname + "</td><td>" + MatchStartTime + "</td><td>" + MatchEndTime + "</td><tr>";
             }
 

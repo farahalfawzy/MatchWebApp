@@ -145,7 +145,6 @@ username VARCHAR(20),
 FOREIGN KEY (username) references SystemUser (userName) ON UPDATE CASCADE ON DELETE CASCADE,
 Primary Key(National_Id)
 )
-
 Create Table Match
 (
 match_ID INT IDENTITY Primary Key,
@@ -836,7 +835,6 @@ where  c2.club_ID > c1.club_ID AND --OR C2.ID <> C1.ID (ALLOWS DUPS)
 				   ((M.Guest_club_id=C2.club_ID AND M.Host_club_Id=C1.club_ID) OR
 				   (M.Guest_club_id=C1.club_ID AND M.Host_club_Id=C2.club_ID)))
 Go
-
 create function clubsNeverPlayed
 (@clubname varchar (20))
 
@@ -1187,3 +1185,14 @@ from match m
 where m.Host_club_Id=@host_id  and m.Guest_club_id=@club_id and m.end_time=@endTime and m.start_time=@startTime)
 end
 
+
+SELECT * FROM MATCH
+SELECT * FROM Stadium
+SELECT * FROM StadiumManager
+SELECT * FROM Club
+SELECT * FROM ClubRepresentative
+SELECT * FROM HostRequest
+SELECT * FROM SystemUser
+SELECT * FROM Fan
+SELECT * FROM Ticket
+SELECT* FROM TicketBuyingTransactions
