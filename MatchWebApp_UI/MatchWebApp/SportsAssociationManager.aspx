@@ -68,7 +68,7 @@
     <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
         <tr align="left" style="background-color:#004080;color:White;" >
             <td class="auto-style1"> Host Club Name </td>                        
-            <td class="auto-style2"> guest Club name </td>            
+            <td class="auto-style2"> Guest Club name </td>            
             <td>Match Start Time</td>   
             <td>Match End Time</td> 
 
@@ -85,7 +85,7 @@
     <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
         <tr align="left" style="background-color:#004080;color:White;" >
             <td class="auto-style1"> Host Club Name </td>                        
-            <td class="auto-style2"> guest Club name </td>            
+            <td class="auto-style2"> Guest Club name </td>            
             <td>Match Start Time</td>   
             <td>Match End Time</td> 
 
@@ -100,8 +100,8 @@
             clubs never scheduled to play
     <table width="100%" align="center" cellpadding="2" cellspacing="2" border="0" bgcolor="#EAEAEA" >
         <tr align="left" style="background-color:#004080;color:White;" >
-            <td class="auto-style1"> Host Club Name </td>                        
-            <td class="auto-style2"> guest Club name </td>            
+            <td class="auto-style1"> Club 1 Name </td>                        
+            <td class="auto-style2"> Club 2 Name </td>            
             
 
         </tr>
