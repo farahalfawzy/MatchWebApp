@@ -66,16 +66,23 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
             String Cname = Club_name.Text.ToLower();
             String location = Location.Text.ToLower();
-            SqlCommand addClub = new SqlCommand("addClub", conn);
-            addClub.CommandType = CommandType.StoredProcedure;
-            addClub.Parameters.Add(new SqlParameter("@clubName", Cname));
-            addClub.Parameters.Add(new SqlParameter("@location", location));
-            conn.Open();
-            addClub.ExecuteNonQuery();
-            Club_name.Text = "club added successfully";
-            Location.Text = "";
-            conn.Close();
-
+            if (Cname.Equals("") || location.Equals(""))
+            {
+                Club_name.Text = "please fill all the fields";
+                Location.Text = "please fill all the fields";
+            }
+            else
+            {
+                SqlCommand addClub = new SqlCommand("addClub", conn);
+                addClub.CommandType = CommandType.StoredProcedure;
+                addClub.Parameters.Add(new SqlParameter("@clubName", Cname));
+                addClub.Parameters.Add(new SqlParameter("@location", location));
+                conn.Open();
+                addClub.ExecuteNonQuery();
+                Club_name.Text = "club added successfully";
+                Location.Text = "";
+                conn.Close();
+            }
 
         }
 
@@ -85,43 +92,50 @@ namespace MatchWebApp
             string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
             String Cname = delete_club.Text.ToLower();
-            SqlCommand deleteclub = new SqlCommand("deleteClub", conn);
-            deleteclub.CommandType = CommandType.StoredProcedure;
-            deleteclub.Parameters.Add(new SqlParameter("@clubName", Cname));
-            SqlCommand allClubs = new SqlCommand("select * from Club", conn);
-
-            conn.Open();
-            SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
-            while (rdr.Read())
+            if (Cname.Equals("") )
             {
-                String name = rdr.GetString(rdr.GetOrdinal("name"));
-
-
-                if (name.Equals(Cname))
-                {
-
-
-                    flag = true;
-
-                }
-
-
-            }
-            if (flag == true)
-            {
-                conn.Close();
-                conn.Open();
-                deleteclub.ExecuteNonQuery();
-                delete_club.Text = "club deleted successfully";
-
+                delete_club.Text = "please fill all the fields";
             }
             else
             {
-                delete_club.Text = "this club doesnt exist";
+                SqlCommand deleteclub = new SqlCommand("deleteClub", conn);
+                deleteclub.CommandType = CommandType.StoredProcedure;
+                deleteclub.Parameters.Add(new SqlParameter("@clubName", Cname));
+                SqlCommand allClubs = new SqlCommand("select * from Club", conn);
+
+                conn.Open();
+                SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    String name = rdr.GetString(rdr.GetOrdinal("name"));
+
+
+                    if (name.Equals(Cname))
+                    {
+
+
+                        flag = true;
+
+                    }
+
+
+                }
+                if (flag == true)
+                {
+                    conn.Close();
+                    conn.Open();
+                    deleteclub.ExecuteNonQuery();
+                    delete_club.Text = "club deleted successfully";
+
+                }
+                else
+                {
+                    delete_club.Text = "this club doesnt exist";
+                }
+
+
+                conn.Close();
             }
-
-
-            conn.Close();
         }
 
         protected void add_stadium_Click(object sender, EventArgs e)
@@ -131,22 +145,32 @@ namespace MatchWebApp
 
             String sname = Stadium_name.Text.ToLower();
             String slocation = Stadium_location.Text.ToLower();
-            int capacity = Int32.Parse(Stadium_capacity.Text);
+            String cap = Stadium_capacity.Text;
+            if (cap.Equals("") || sname.Equals("") || slocation.Equals(""))
+            {
+               
+                Stadium_name.Text = "please fill all the fields";
+                Stadium_location.Text = "please fill all the fields";
+                Stadium_capacity.Text = "please fill all the fields";
+            }
+            else
+            {
+                int capacity = Int32.Parse(Stadium_capacity.Text);
+                SqlCommand addstadium = new SqlCommand("addStadium", conn);
+                addstadium.CommandType = CommandType.StoredProcedure;
 
-            SqlCommand addstadium = new SqlCommand("addStadium", conn);
-            addstadium.CommandType = CommandType.StoredProcedure;
+                addstadium.Parameters.Add(new SqlParameter("@sname", sname));
+                addstadium.Parameters.Add(new SqlParameter("@location", slocation));
+                addstadium.Parameters.Add(new SqlParameter("@capacity", capacity));
 
-            addstadium.Parameters.Add(new SqlParameter("@sname", sname));
-            addstadium.Parameters.Add(new SqlParameter("@location", slocation));
-            addstadium.Parameters.Add(new SqlParameter("@capacity", capacity));
+                conn.Open();
 
-            conn.Open();
-
-            addstadium.ExecuteNonQuery();
-            Stadium_name.Text = "stadium added successfully";
-            Stadium_location.Text = "";
-            Stadium_capacity.Text = "";
-            conn.Close();
+                addstadium.ExecuteNonQuery();
+                Stadium_name.Text = "stadium added successfully";
+                Stadium_location.Text = "";
+                Stadium_capacity.Text = "";
+                conn.Close();
+            }
         }
 
         protected void delete_stadium_Click(object sender, EventArgs e)
@@ -156,50 +180,45 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
 
             String sname = Delete_stadium_name.Text.ToLower();
-
-            SqlCommand delete_stadium = new SqlCommand("deleteStadium", conn);
-
-            delete_stadium.CommandType = CommandType.StoredProcedure;
-            delete_stadium.Parameters.Add(new SqlParameter("@sname", sname));
-
-
-            SqlCommand allstadiums = new SqlCommand("select * from Stadium", conn);
-
-            conn.Open();
-            SqlDataReader rdr = allstadiums.ExecuteReader(CommandBehavior.CloseConnection);
-            while (rdr.Read())
+            if (sname.Equals(""))
             {
-                String name = rdr.GetString(rdr.GetOrdinal("name"));
-
-
-                if (name.Equals(sname))
-                {
-
-
-                    flag = true;
-
-                }
-
-
-            }
-            if (flag == true)
-            {
-                conn.Close();
-                conn.Open();
-                delete_stadium.ExecuteNonQuery();
-                Delete_stadium_name.Text = "stadium deleted successfully";
-
-
+                Delete_stadium_name.Text = "please fill all the fields";
             }
             else
             {
-                Delete_stadium_name.Text = "this stadium doesnt exist";
+                SqlCommand delete_stadium = new SqlCommand("deleteStadium", conn);
+
+                delete_stadium.CommandType = CommandType.StoredProcedure;
+                delete_stadium.Parameters.Add(new SqlParameter("@sname", sname));
 
 
+                SqlCommand allstadiums = new SqlCommand("select * from Stadium", conn);
+
+                conn.Open();
+                SqlDataReader rdr = allstadiums.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    String name = rdr.GetString(rdr.GetOrdinal("name"));
+
+
+                    if (name.Equals(sname))
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag == true)
+                {
+                    conn.Close();
+                    conn.Open();
+                    delete_stadium.ExecuteNonQuery();
+                    Delete_stadium_name.Text = "stadium deleted successfully";
+                }
+                else
+                {
+                    Delete_stadium_name.Text = "this stadium doesnt exist";
+                }
+                conn.Close();
             }
-
-
-            conn.Close();
         }
 
         protected void Block_fan_Click(object sender, EventArgs e)
@@ -211,62 +230,68 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
 
             String n_id = Block_national_id.Text.ToLower();
-            SqlCommand block_fan = new SqlCommand("blockFan", conn);
-
-            block_fan.CommandType = CommandType.StoredProcedure;
-            block_fan.Parameters.Add(new SqlParameter("@national_id", n_id));
-
-            SqlCommand allfans = new SqlCommand("select * from fan", conn);
-
-            conn.Open();
-            SqlDataReader rdr = allfans.ExecuteReader(CommandBehavior.CloseConnection);
-            while (rdr.Read())
+            if (n_id.Equals(""))
             {
-                String NID = rdr[0].ToString();
-                String status = rdr[5].ToString();
-                Debug.Write(status);
+                Block_national_id.Text = "please fill all the fields";
+            }
+            else
+            {
+                SqlCommand block_fan = new SqlCommand("blockFan", conn);
 
+                block_fan.CommandType = CommandType.StoredProcedure;
+                block_fan.Parameters.Add(new SqlParameter("@national_id", n_id));
 
-                if (NID.Equals(n_id))
+                SqlCommand allfans = new SqlCommand("select * from fan", conn);
+
+                conn.Open();
+                SqlDataReader rdr = allfans.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
                 {
+                    String NID = rdr[0].ToString();
+                    String status = rdr[5].ToString();
+                    Debug.Write(status);
 
 
-                    flag1 = true;
-                    if (status == "False")
+                    if (NID.Equals(n_id))
                     {
-                        flag2 = true;
+
+
+                        flag1 = true;
+                        if (status == "False")
+                        {
+                            flag2 = true;
+                        }
+
                     }
 
+
                 }
-
-
-            }
-            if (flag1 == true)
-            {
-                if (flag2 == true)
+                if (flag1 == true)
                 {
-                    Block_national_id.Text = "this fan is already blocked";
+                    if (flag2 == true)
+                    {
+                        Block_national_id.Text = "this fan is already blocked";
+
+                    }
+                    else
+                    {
+                        conn.Close();
+                        conn.Open();
+                        block_fan.ExecuteNonQuery();
+                        Block_national_id.Text = "fan blocked successfully";
+                    }
 
                 }
                 else
                 {
-                    conn.Close();
-                    conn.Open();
-                    block_fan.ExecuteNonQuery();
-                    Block_national_id.Text = "fan blocked successfully";
+                    Block_national_id.Text = "this fan doesnt exist";
+
+
                 }
 
+
+                conn.Close();
             }
-            else
-            {
-                Block_national_id.Text = "this fan doesnt exist";
-
-
-            }
-
-
-            conn.Close();
-
 
 
         }
