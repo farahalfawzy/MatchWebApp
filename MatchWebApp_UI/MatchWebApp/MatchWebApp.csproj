@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="allAvailableStadiums.aspx" />
     <Content Include="clubInfo.aspx" />
-    <Content Include="ClubRepresentative.aspx" />
+    <Content Include="clubRepresentative.aspx" />
     <Content Include="Fan.aspx" />
     <Content Include="HandleRequests.aspx" />
     <Content Include="Log in.aspx" />
@@ -102,12 +102,12 @@
     <Compile Include="clubInfo.aspx.designer.cs">
       <DependentUpon>clubInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClubRepresentative.aspx.cs">
-      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    <Compile Include="clubRepresentative.aspx.cs">
+      <DependentUpon>clubRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClubRepresentative.aspx.designer.cs">
-      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    <Compile Include="clubRepresentative.aspx.designer.cs">
+      <DependentUpon>clubRepresentative.aspx</DependentUpon>
     </Compile>
     <Compile Include="Fan.aspx.cs">
       <DependentUpon>Fan.aspx</DependentUpon>

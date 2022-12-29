@@ -1,6 +1,7 @@
 CREATE DATABASE MatchDB
 GO
 ----------------------------------------------------------------------------------------------------
+/*
 create proc ins
 as
 INSERT INTO SYSTEMUSER VALUES
@@ -35,10 +36,10 @@ INSERT INTO Match VALUES
 ('2021-07-21 12:00:00','2021-07-21 14:00:00',3,1,3),
 ('2022-03-11 13:00:00','2022-03-11 15:00:00',3,2,1),
 ('2022-11-19 14:00:00','2022-11-19 16:00:00',1,3,3);
-Insert INTO StadiumManager  (name,Username) values
-('StadManager 1','stadmanager1'),
-('StadManager 2','stadmanager2'),
-('StadManager 3','stadmanager3');
+Insert INTO StadiumManager  (name,Username,stadium_id) values
+('StadManager 1','stadmanager1',1),
+('StadManager 2','stadmanager2',2),
+('StadManager 3','stadmanager3',3);
 Insert INTO ClubRepresentative (name,Club_ID,username) Values
 ('clubRep 1',1,'clubrep1'),
 ('clubRep 2',2,'clubrep2'),
@@ -69,6 +70,7 @@ insert into TicketBuyingTransactions(ticket_id,fan_nationalID) Values
 (1,123456),
 (2,234567),
 (3,345678);
+*/
 ------------------------------------------------------------------------------------------------------------
 go
 CREATE PROCEDURE createAllTables
@@ -228,7 +230,6 @@ DROP PROCEDURE IF EXISTS deleteStadium;
 DROP PROCEDURE IF EXISTS blockFan;
 DROP PROCEDURE IF EXISTS unblockFan;
 DROP PROCEDURE IF EXISTS addRepresentative;
-DROP FUNCTION IF EXISTS viewAvailableStadiumOn;
 DROP PROCEDURE IF EXISTS addHostRequest;
 DROP FUNCTION IF EXISTS allUnassignedMatches;
 DROP PROCEDURE IF EXISTS addStadiumManager;
@@ -244,7 +245,7 @@ DROP VIEW [matchesPerTeam]
 DROP VIEW [clubsNeverMatched]
 DROP FUNCTION IF EXISTS clubsNeverPlayed;
 DROP FUNCTION IF EXISTS matchWithHighestAttendance;
-DROP FUNCTION IF EXISTS matchRankedByAttendance;
+DROP FUNCTION IF EXISTS matchesRankedByAttendance;
 DROP FUNCTION IF EXISTS requestsFromClub;
 drop procedure if exists userLogin;
 drop procedure if exists registerstadiummanager;
@@ -257,6 +258,12 @@ drop procedure if exists MatchExists;
 drop view MatchesNeverPlayed;
 DROP FUNCTION IF EXISTS AlreadyPlayedMatches;
 DROP FUNCTION IF EXISTS upcomingMatches;
+DROP PROC IF EXISTS abdoHostRequest;
+DROP PROC IF EXISTS allMatchesR;
+DROP FUNCTION IF EXISTS upcomingMatchesOTwo
+DROP PROC IF EXISTS representativeClub;
+DROP PROC IF EXISTS allClubRepresenting;
+DROP FUNCTION IF EXISTS viewAvailableStadiumsOn;
 
 go
 CREATE PROCEDURE clearAllTables
@@ -914,11 +921,13 @@ GO
 ----------------------------------------------------------------------------------------------------
 ------------------------------------added proc and functions-----------------------------------------
 -----------------------------------------------------------------------------------------------------
+
 Create Procedure userLogin
 @username varchar(20),
 @password Varchar(20),
 @type VARCHAR(20) OUTPUT,
-@success int OUTPUT
+@success int OUTPUT,
+@status int output
 AS
 
 begin
@@ -936,9 +945,13 @@ else
 		end
 	else
 		begin
+		set @status=1;
 			set @success=1;
 			if exists (SELECT username FROM fan Where username=@username)
+			begin
 				set @type='fan';
+				set @status=(select status from fan where username=@username);
+			end
 			if exists (SELECT username FROM sportsAssociationManager Where username=@username)
 				set @type='SportsAssocManager';
 			if exists (SELECT username FROM StadiumManager Where username=@username)
@@ -1185,7 +1198,7 @@ from match m
 where m.Host_club_Id=@host_id  and m.Guest_club_id=@club_id and m.end_time=@endTime and m.start_time=@startTime)
 end
 
-
+/*
 SELECT * FROM MATCH
 SELECT * FROM Stadium
 SELECT * FROM StadiumManager
@@ -1196,4 +1209,100 @@ SELECT * FROM SystemUser
 SELECT * FROM Fan
 SELECT * FROM Ticket
 SELECT* FROM TicketBuyingTransactions
+*/
+
+
+
+go
+
+--Abdullahhhhhhhhhhhhhhhhhhhhhhhhhhhghhghhhhhhy
+Create Procedure allClubRepresenting
+@username VARCHAR(20),
+@id int OUTPUT,
+@Name VARCHAR(20) OUTPUT,
+@Location VARCHAR(20) OUTPUT
+AS
+SELECT @id=C.club_ID, @Name=C.Name, @Location=C.Location
+FROM Club C INNER JOIN ClubRepresentative CR ON CR.Club_ID=C.club_ID
+WHERE CR.username=@username
+GO
+
+Create Procedure representativeClub
+@username Varchar(20),
+@Club VARCHAR(20) OUTPUT
+AS
+SELECT @Club=C.Name
+FROM CLUB C INNER JOIN ClubRepresentative CR ON C.club_ID=CR.Club_ID
+WHERE CR.username=@username
+GO
+
+create function upcomingMatchesOTwo
+(@clubname varchar (20))
+returns table 
+as
+return(
+select   C.Name AS 'club Name' , C2.Name AS 'Competing Club', M.start_time AS 'Start Time', M.end_time AS 'End Time',S.Name AS 'Stadium Name'
+FROM CLUB C INNER JOIN MATCH M ON  M.Host_club_Id=C.club_ID 
+INNER JOIN CLUB C2 ON  M.Guest_club_id=C2.club_ID
+LEFT OUTER JOIN STADIUM S  ON S.Id=M.Stadium_id 
+WHERE M.start_time>CURRENT_TIMESTAMP AND ( C.Name=@clubname )
+UNION
+select   C.Name AS 'club Name' , C2.Name AS 'Competing Club', M.start_time AS 'Start Time', M.end_time AS 'End Time',S.Name AS 'Stadium Name'
+FROM CLUB C INNER JOIN MATCH M ON  M.Host_club_Id=C.club_ID
+INNER JOIN CLUB C2 ON  M.Guest_club_id=C2.club_ID
+LEFT OUTER JOIN STADIUM S  ON S.Id=M.Stadium_id 
+WHERE M.start_time>CURRENT_TIMESTAMP AND ( C2.Name=@clubname)
+);
+GO
+
+
+
+
+CREATE procedure allMatchesR 
+(@Club VARCHAR(20))
+AS
+SELECT M.start_time
+FROM Match M, Club C1, Club C2
+WHERE M.Host_club_Id=C1.club_ID AND M.Guest_club_id=C2.club_ID AND(C1.Name=@club OR C2.Name=@Club) AND M.start_time>CURRENT_TIMESTAMP;
+
+go
+
+--EXECUTE allMatchesR 'club1'
+go
+CREATE PROC abdoHostRequest
+@cname VARCHAR(20),
+@mname VARCHAR(20),
+@timeofmatch DATETIME,
+@suc INT OUTPUT
+AS
+
+DECLARE @manager_id INT 
+SET @manager_id=(SELECT Id
+FROM StadiumManager
+Where name=@mname)
+
+DECLARE @rep_id INT
+SET @rep_id=(SELECT cr.Id
+FROM Club c inner join ClubRepresentative cr on (c.club_ID=cr.Club_ID)
+WHERE C.Name=@cname)
+
+DECLARE @club_id INT
+SET @club_id=(SELECT Club.club_ID
+FROM Club
+WHERE Club.Name=@cname)
+
+DECLARE @match_id INT
+SET @match_id=(SELECT MATCH.match_ID
+FROM MATCH
+WHERE Match.start_time=@timeofmatch AND Match.Host_club_Id=@club_id)
+IF NOT EXISTS (select * from HostRequest where  Match_ID=@match_id and Manager_ID=@manager_id and Representative_ID=@rep_id and status NOT LIKE 'rejected')
+begin
+INSERT INTO HostRequest(status,Match_ID,Manager_ID,Representative_ID)
+VALUES('unhandled',@match_id,@manager_id,@rep_id)
+set @suc=1;
+end
+else 
+set @suc=0;
+
+GO
 

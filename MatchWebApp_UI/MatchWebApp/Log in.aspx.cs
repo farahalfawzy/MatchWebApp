@@ -30,8 +30,11 @@ namespace MatchWebApp
             loginproc.Parameters.Add(new SqlParameter("@password", pass));
             SqlParameter type = loginproc.Parameters.Add("@type", SqlDbType.VarChar, 20);
             SqlParameter success = loginproc.Parameters.Add("@success", SqlDbType.Int);
+            SqlParameter fanstatus = loginproc.Parameters.Add("@status", SqlDbType.Int);
+
             type.Direction = ParameterDirection.Output;
             success.Direction = ParameterDirection.Output;
+            fanstatus.Direction = ParameterDirection.Output;
             conn.Open();
             loginproc.ExecuteNonQuery();
             conn.Close();
@@ -52,7 +55,7 @@ namespace MatchWebApp
                 }
                 if (type.Value.ToString().Equals("ClubRepresentative"))
                 {
-                    Response.Redirect("ClubRepresentative.aspx?username=" + username + " ");
+                    Response.Redirect("ClubRepresentative.aspx?username=" + username + "&err= &err2= ");
                 }
                 if (type.Value.ToString().Equals("StadiumManager"))
                 {
@@ -65,7 +68,11 @@ namespace MatchWebApp
                 }
                 if (type.Value.ToString().Equals("fan"))
                 {
+                    if(fanstatus.Value.ToString().Equals("1"))
                     Response.Redirect("Fan.aspx?username=" + username + " ");
+                    else
+                        Label1.Text = "This Fan is Blocked";
+
                 }
             }
 

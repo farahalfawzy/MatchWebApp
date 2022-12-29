@@ -36,7 +36,7 @@ namespace MatchWebApp
                 string Name = rdr.GetString(0);
                 string Loc = rdr.GetString(1);
                 int Capacity = rdr.GetInt32(2);
-                htmlStr += "<tr><td>" + Name + "</td><td>" + Loc + "</td><td>" + Capacity+  "</td></tr>";
+                htmlStr += "</td><td>" + Name + "</td><td>" + Loc + "</td><td>" + Capacity + "</td><tr>";
                 Debug.WriteLine(htmlStr);
             }
 
