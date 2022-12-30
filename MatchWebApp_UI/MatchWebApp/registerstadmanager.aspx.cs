@@ -50,7 +50,7 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
 
             String Managername = name.Text;
-            String username = Username.Text;
+            String username = Username.Text.ToLower();
             String password = Password.Text;
             String stadium = DropDownList1.SelectedItem.Value;
 
