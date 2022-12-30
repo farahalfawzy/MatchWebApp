@@ -27,7 +27,7 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
 
             String Manname = name.Text;
-            String username = Username.Text;
+            String username = Username.Text.ToLower();
             String password = Password.Text;
 
 
