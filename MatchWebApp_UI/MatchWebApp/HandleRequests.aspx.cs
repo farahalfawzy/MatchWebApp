@@ -201,6 +201,7 @@ namespace MatchWebApp
                 conn.Open();
                 RejectReq.ExecuteNonQuery();
                 conn.Close();
+                Debug.Write("here\n");
 
             }
             Response.Redirect("HandleRequests.aspx?username=" + username + "");

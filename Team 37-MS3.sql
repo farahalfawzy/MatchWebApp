@@ -1,5 +1,6 @@
 CREATE DATABASE MatchDB
 GO
+select * from fan
 ----------------------------------------------------------------------------------------------------
 /*
 create proc ins
@@ -95,7 +96,6 @@ club_ID INT IDENTITY Primary Key,
 Name VARCHAR(20),
 Location VARCHAR(20)
 );
-
 Create Table StadiumManager
 (
 Id int Identity,
@@ -187,6 +187,10 @@ ticket_id INT
 FOREIGN KEY (fan_nationalID) references FAN(National_ID) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (ticket_id) references Ticket(ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+go
+INSERT INTO SystemUser Values('admin','admin');
+Insert into SystemAdmin VAlues ('admin','admin');
 go
 CREATE PROCEDURE dropAllTables
 AS
@@ -1198,20 +1202,6 @@ from match m
 where m.Host_club_Id=@host_id  and m.Guest_club_id=@club_id and m.end_time=@endTime and m.start_time=@startTime)
 end
 
-/*
-SELECT * FROM MATCH
-SELECT * FROM Stadium
-SELECT * FROM StadiumManager
-SELECT * FROM Club
-SELECT * FROM ClubRepresentative
-SELECT * FROM HostRequest
-SELECT * FROM SystemUser
-SELECT * FROM Fan
-SELECT * FROM Ticket
-SELECT* FROM TicketBuyingTransactions
-*/
-
-
 
 go
 
@@ -1257,13 +1247,12 @@ GO
 
 
 
-
 CREATE procedure allMatchesR 
 (@Club VARCHAR(20))
 AS
 SELECT M.start_time
 FROM Match M, Club C1, Club C2
-WHERE M.Host_club_Id=C1.club_ID AND M.Guest_club_id=C2.club_ID AND(C1.Name=@club OR C2.Name=@Club) AND M.start_time>CURRENT_TIMESTAMP;
+WHERE M.Host_club_Id=C1.club_ID AND M.Guest_club_id=C2.club_ID AND(C1.Name=@club ) AND M.start_time>CURRENT_TIMESTAMP;
 
 go
 

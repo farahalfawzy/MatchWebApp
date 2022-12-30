@@ -26,12 +26,13 @@ namespace MatchWebApp
             
 
             String Fanname = name.Text;
-            String username = Username.Text;
+            String username = Username.Text.ToLower();
             String password = Password.Text;
             String NationalId = NID.Text;
             String phone_number = phoneno.Text;
             String address = add.Text;
             String Birthdate = birthdate.Text;
+            Debug.Write(Birthdate + "\n\n");
 
             if (username.Equals("") || Fanname.Equals("") || password.Equals("") || Birthdate == "" || NationalId.Equals("") || address.Equals("") || phone_number == null)
             {

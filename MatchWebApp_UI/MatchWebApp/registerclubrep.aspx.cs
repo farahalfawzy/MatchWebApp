@@ -48,7 +48,7 @@ namespace MatchWebApp
             SqlConnection conn = new SqlConnection(connStr);
 
             String  Repname = name.Text;
-            String username = Username.Text;
+            String username = Username.Text.ToLower();
             String password = Password.Text;
             String Club = DropDownList1.SelectedItem.Value;
 
@@ -93,7 +93,7 @@ namespace MatchWebApp
                 else
                 {
 
-                    Response.Redirect("ClubRepresentative.aspx?username=" + username + " ");
+                    Response.Redirect("ClubRepresentative.aspx?username=" + username + "&err= &err2= ");
 
 
                 }

@@ -22,7 +22,7 @@ namespace MatchWebApp
         {
             string connStr = WebConfigurationManager.ConnectionStrings["MatchWebApp"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
-            String username = Username.Text;
+            String username = Username.Text.ToLower();
             String pass = Password.Text;
             SqlCommand loginproc = new SqlCommand("userLogin", conn);
             loginproc.CommandType = CommandType.StoredProcedure;

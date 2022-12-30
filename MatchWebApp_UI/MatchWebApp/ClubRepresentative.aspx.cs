@@ -85,11 +85,15 @@ namespace MatchWebApp
 
         protected void Stadiums_Click(object sender, EventArgs e)
         {
-            string Date = TextBox1.Text+" "+ TextBox2;
+            string Date = TextBox1.Text+" "+ TextBox2.Text;
             if (TextBox1.Text.Equals("") || TextBox2.Equals(""))
                 Response.Redirect("ClubRepresentative.aspx?username=" + username + "&err= please fill all fields &err2= ");
             else
-            Response.Redirect("allAvailableStadiums.aspx?Date=" + Date + " ");
+            {
+                Debug.WriteLine("\n\n\n" + Date + "\n\n\n");
+
+                Response.Redirect("allAvailableStadiums.aspx?Date=" + Date + " ");
+            }
         }
 
         protected void Request_Click(object sender, EventArgs e)
