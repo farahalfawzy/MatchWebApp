@@ -31,11 +31,6 @@ The MatchWebApp is a web application developed as part of a database management 
 - **Backend:** SQL for database creation and management.
 - **Frontend:** ASP.NET for developing an intuitive user interface.
 
-## Repository Structure
-- `/SQL Scripts`: Contains the SQL file for database schema creation and management.
-- `/ASP.NET Project`: Contains the full ASP.NET project files for the web application.
-
-
 
 
 
